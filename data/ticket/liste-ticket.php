@@ -64,6 +64,7 @@ $tickets = $query->fetchAll();
                             <th>Temps passé</th>
                             <th>Projet</th>
                             <th>Visible client</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,6 +80,9 @@ $tickets = $query->fetchAll();
                                 <td><?= safe($ticket['temps_passe']) ?></td>
                                 <td><?= safe($ticket['id_projet']) ?></td>
                                 <td><?= $ticket['visible_client'] ? 'Oui' : 'Non' ?></td>
+                                <td>
+                                    <a href="ticket-update.php?id=<?= $ticket['id_ticket'] ?>" class="btn btn-sm btn-warning">✏️ Modifier</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
