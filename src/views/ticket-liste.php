@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Liste des tickets</title>
 </head>
+
 <body>
+    <h1>Liste des tickets</h1>
 
-<p>Aucun ticket pour le moment.</p>
-    
-<a href="#">
-    <button type="button">Nouveau ticket</button>
-</a>
+    <a href="/ticket-creer">Créer un nouveau ticket</a>
 
+    <ul>
+        <?php foreach ($tickets as $ticket): ?>
+            <li>
+                <strong><?= htmlspecialchars($ticket['titre']) ?></strong> -
+                <?= htmlspecialchars($ticket['date']) ?> -
+                <a href="/ticket/<?= $ticket['id'] ?>">Voir le détail</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 </body>
+
 </html>

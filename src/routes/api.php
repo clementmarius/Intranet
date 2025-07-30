@@ -12,6 +12,8 @@ if ($uri === '/tickets') {
     $controller->create();
 } elseif (preg_match('#^/ticket/(\d+)$#', $uri, $matches)) {
     $controller->detail($matches[1]);
+} elseif (preg_match('#^/ticket-update/(\d+)$#', $uri, $matches)) {
+    $controller->update($matches[1]);
 } else {
     http_response_code(404);
     echo "Page non trouvée.";
