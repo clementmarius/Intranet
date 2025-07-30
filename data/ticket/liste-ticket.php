@@ -44,8 +44,9 @@ $tickets = $query->fetchAll();
         <h1 class="mb-4 text-center">📋 Liste des tickets</h1>
 
         <div class="d-flex justify-content-center mb-4">
-            <a href="/intranet/data/index.php" class="btn btn-primary">➕ Ajouter un ticket</a>
+            <a href="https://intranet.acck.fr/data/ticket/ticket.php" class="btn btn-primary">➕ Ajouter un ticket</a>
         </div>
+
 
         <?php if (count($tickets) === 0): ?>
             <div class="alert alert-info">Aucun ticket enregistré.</div>
@@ -81,7 +82,7 @@ $tickets = $query->fetchAll();
                                 <td><?= safe($ticket['id_projet']) ?></td>
                                 <td><?= $ticket['visible_client'] ? 'Oui' : 'Non' ?></td>
                                 <td>
-                                    <a href="ticket-update.php?id=<?= $ticket['id_ticket'] ?>" class="btn btn-sm btn-warning">✏️ Modifier</a>
+                                    <a href="https://intranet.acck.fr/data/ticket/ticket-update.php?id=<?= $ticket['id_ticket'] ?>" class="btn btn-sm btn-warning">✏️ Modifier</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

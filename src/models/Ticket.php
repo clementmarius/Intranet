@@ -1,42 +1,39 @@
 <?php
 
-require_once __DIR__ . '/../../config/database.php';
+class Ticket {
+    private $pdo;
 
-use config\Database;
-
-class User
-{
-
-    private PDO $conn;
-
-    public function __construct()
-    {
-        try {
-            $this->conn = Database::getInstance();
-        } catch (PDOException $e) {
-            error_log("[" . date("Y-m-d H:i:s") . "] Erreur de connexion : " . $e->getMessage(), 3, __DIR__ . '/../../logs/error.log');
-            // Tu peux lever une exception ou gérer autrement selon ton besoin
-            die("Connexion à la base impossible.");
-        }
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
     }
 
+    public function getAllTickets() {
+        $stmt = $this->pdo->prepare("SELECT * FROM tickets");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-    public function addNewUser($name, $age, $job): void
-    {
-        try {
-            $query = "INSERT INTO user (name, age, job) VALUES (:name, :age, :job)";
+    public function getTicketById($id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM tickets WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 
-            if ($this->conn === null) {
-                throw new Exception("Database connection is null.");
-            }
+    public function createTicket($data) {
+        $stmt = $this->pdo->prepare("INSERT INTO tickets (titre, date, structure, responsable, statut, description, date_fin, temps_passe, visible_client, id_site)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(":name", $name, PDO::PARAM_STR);
-            $stmt->bindParam(":age", $age, PDO::PARAM_STR);
-            $stmt->bindParam(":job", $job, PDO::PARAM_STR);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            error_log("Query failed: " . $e->getMessage(), 3, '../../logs/error.log');
-        }
+        return $stmt->execute([
+            $data['titre_ticket'],
+            $data['date_ticket'],
+            $data['structure'],
+            $data['responsable'],
+            $data['statut'],
+            $data['description_ticket'],
+            $data['date_de_fin'],
+            $data['temps_passe'],
+            isset($data['visible_client']) ? 1 : 0,
+            $data['id_site']
+        ]);
     }
 }

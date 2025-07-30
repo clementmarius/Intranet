@@ -1,25 +1,37 @@
 <?php
 
 require_once __DIR__ . '/../models/Ticket.php';
+require_once __DIR__ . '/../../config/database.php';
 
-class TicketsController
-{
+class TicketsController {
+    private $ticketModel;
 
-    private $ticket;
-
-    public function __construct()
-    {
-        $this->ticket = new User();
+    public function __construct() {
+        $pdo = getPDO();
+        $this->ticketModel = new Ticket($pdo);
     }
 
-    public function liste()
-    {
+    public function liste() {
+        $tickets = $this->ticketModel->getAllTickets();
         include __DIR__ . '/../views/ticket-liste.php';
     }
 
-
-    public function detail()
-    {
+    public function detail($id) {
+        $ticket = $this->ticketModel->getTicketById($id);
         include __DIR__ . '/../views/ticket-detail.php';
+    }
+
+    public function create() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $success = $this->ticketModel->createTicket($_POST);
+            if ($success) {
+                header("Location: /tickets");
+                exit;
+            } else {
+                echo "Erreur lors de la création du ticket.";
+            }
+        } else {
+            include __DIR__ . '/../views/ticket-detail.php';
+        }
     }
 }
