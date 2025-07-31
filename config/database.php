@@ -1,5 +1,9 @@
 <?php
 
+namespace acck\config;
+
+use PDO;
+
 function getPDO()
 {
     return new PDO(

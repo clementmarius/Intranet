@@ -1,7 +1,14 @@
 <?php
 
+namespace ACCK\controllers;
+
 require_once __DIR__ . '/../models/Ticket.php';
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../../config/database.php';
+
+
+
+use ACCK\models\Ticket;
+use function ACCK\config\getPDO;
 
 class TicketsController
 {
@@ -30,13 +37,14 @@ class TicketsController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $success = $this->ticketModel->createTicket($_POST);
             if ($success) {
-                header("Location: /tickets");
+                header("Location: /api/");
                 exit;
             } else {
-                echo "Erreur lors de la création du ticket.";
+                $error = "Erreur lors de la création du ticket.";
+                include __DIR__ . '/../views/ticket-create.php';
             }
         } else {
-            include __DIR__ . '/../views/ticket-detail.php';
+            include __DIR__ . '/../views/ticket-create.php';
         }
     }
 

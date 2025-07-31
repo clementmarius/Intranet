@@ -1,7 +1,7 @@
 /* Script de creation des tables */
 -- Table Client
 CREATE TABLE
-    Client (
+    client (
         id_client INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         nom VARCHAR(255) NOT NULL,
         téléphone VARCHAR(20) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE
 
 -- Table Projet
 CREATE TABLE
-    Projet (
+    projet (
         id_projet INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         nom_projet VARCHAR(255) NOT NULL,
         url_projet TEXT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE
 
 -- Table MAJ
 CREATE TABLE
-    MAJ (
+    maj (
         id_maj INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         date DATE NOT NULL,
         id_projet INT NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE
 
 -- Table Joueur
 CREATE TABLE
-    Joueur (
+    joueur (
         id_player INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         Role INT NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE
 
 -- Table Projet_Joueur (liaison Projet ↔ Joueur)
 CREATE TABLE
-    Projet_Joueur (
+    projet_joueur (
         id_projet_joueur INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         id_projet INT NOT NULL,
         id_joueur INT NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE
 
 -- Table Ticket
 CREATE TABLE
-    Ticket (
+    ticket (
         id_ticket INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         titre_ticket VARCHAR(255) NOT NULL,
         date_ticket DATE NOT NULL,
