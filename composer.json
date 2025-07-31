@@ -3,7 +3,7 @@
     "description": "Connexion a la base de donnees Intranet",
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "acck\\": "src/"
         }
     },
     "authors": [
