@@ -39,6 +39,12 @@ if ($uri === '/tickets') {
 } elseif ($uri === '/projets') {
     $controller = new ProjetController();
     $controller->liste();
+} elseif ($uri === '/projet-creer') {
+    $controller = new ProjetController();
+    $controller->create();
+} elseif (preg_match('#^/projet-update/(\d+)$#', $uri, $matches)) {   // <-- AJOUT
+    $controller = new ProjetController();
+    $controller->update($matches[1]);
 } elseif ($uri === '/' || $uri === '') {
     include __DIR__ . '/../views/home.php';
 } else {
