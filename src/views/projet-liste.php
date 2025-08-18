@@ -14,6 +14,7 @@
         <div class="d-flex justify-content-center gap-3 mb-4">
             <a href="/api/tickets" class="btn btn-primary">Voir les tickets</a>
             <a href="/api/projet-creer" class="btn btn-success">Ajouter un projet</a>
+            <a href="#" class="btn btn-info">Ajouter un client</a>
         </div>
 
         <div class="table-responsive">

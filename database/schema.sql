@@ -4,7 +4,7 @@ CREATE TABLE
     client (
         id_client INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
         nom VARCHAR(255) NOT NULL,
-        téléphone VARCHAR(20) NOT NULL,
+        telephone VARCHAR(20) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL
     );
 
